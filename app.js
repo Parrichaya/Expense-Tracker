@@ -17,7 +17,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 let cors = require('cors');
 app.use(cors());
 
-
 const userRoutes = require('./routes/user');
 app.use('/user', userRoutes);
 
@@ -32,6 +31,10 @@ app.use('/premium', premiumRoutes);
 
 const forgotPasswordRoutes = require('./routes/forgotpassword');
 app.use('/password', forgotPasswordRoutes);
+
+app.use((req, res, next) => {
+    res.sendFile(path.join(__dirname, `public/${req.url}`));
+})
 
 const User = require('./models/user');
 const Expense = require('./models/expense');

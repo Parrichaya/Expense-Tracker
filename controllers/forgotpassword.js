@@ -32,7 +32,7 @@ exports.forgotPassword = (req, res, next) => {
                     sender,
                     to: receivers,
                     subject: 'Password Reset link',
-                    htmlContent: `<a href="http://localhost:5000/password/resetpassword/${id}">Click here to reset your password</a>`,
+                    htmlContent: `<a href="http://13.236.146.218:5000/password/resetpassword/${id}">Click here to reset your password</a>`,
                 })
                 .then(() => {
                     console.log('Email sent successfully');

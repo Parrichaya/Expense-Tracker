@@ -17,8 +17,7 @@ function signup(event) {
         const errorMessage = document.getElementById('error-message');
         errorMessage.textContent = '';
         errorMessage.textContent = err.response.data.message;
-      })
-   
+      })   
     document.getElementById("username").value = "";
     document.getElementById("email").value = "";
     document.getElementById("password").value = "";

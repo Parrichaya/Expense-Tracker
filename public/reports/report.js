@@ -29,22 +29,22 @@ function displayExpenseReport(expensesData, type) {
     expenseTableBody.innerHTML += totalAmountRow;
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-    const type = localStorage.getItem('reportType');
+// window.addEventListener('DOMContentLoaded', () => {
+//     const type = localStorage.getItem('reportType');
 
-    if (type) {
-        const dateOrMonth = localStorage.getItem('reportDateOrMonth'); 
-        generateExpenseReport(type, dateOrMonth);
-    }
-})
+//     if (type) {
+//         const dateOrMonth = localStorage.getItem('reportDateOrMonth'); 
+//         generateExpenseReport(type, dateOrMonth);
+//     }
+// })
 
 function generateExpenseReport(type, dateOrMonth) {
     localStorage.setItem('reportType', type);
     localStorage.setItem('reportDateOrMonth', dateOrMonth);
-    axios.post(`http://localhost:5000/reports/report/?type=${type}`, { [type === 'daily' ? 'date' : 'month']: dateOrMonth }, { headers: { "Authorization": localStorage.getItem("token") } })
+    axios.post(`http://13.236.146.218:5000/reports/report/?type=${type}`, { [type === 'daily' ? 'date' : 'month']: dateOrMonth }, { headers: { "Authorization": localStorage.getItem("token") } })
     .then((response) => {
         const expensesData = response.data.expenses;
-        displayExpenseReport(expensesData);
+        displayExpenseReport(expensesData, type);
     })
     .catch((error) => console.log(error));
 }

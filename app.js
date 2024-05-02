@@ -62,7 +62,7 @@ ForgotPassword.belongsTo(User);
 User.hasMany(FileDownloaded);
 FileDownloaded.belongsTo(User);
 
-sequelize.sync({force: true})
+sequelize.sync({})
     .then(() => {
         console.log('Listening...');
         app.listen(process.env.PORT || 5000);

@@ -9,11 +9,13 @@ const S3Service = require('../services/S3services');
 exports.addExpense = async (req, res, next) => {
     const t = await req.user.sequelize.transaction();
     try {
+        const date = req.body.date;
         const amount = req.body.amount;
         const description = req.body.description;
         const category = req.body.category;
 
         const newExpense = await req.user.createExpense({
+            date: date,
             amount: amount,
             description: description,
             category: category

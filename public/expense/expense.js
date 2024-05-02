@@ -192,7 +192,7 @@ buyPremiumBtn.addEventListener("click", (event) => {
 
 const downloadBtn = document.getElementById("download-file-btn");
 const generateReportLnk = document.getElementById("generate-report-link");
-downloadBtn.disabled = true;
+downloadBtn.style.display = "none";
 
 function userPremiumStatus() {
   axios
@@ -203,7 +203,7 @@ function userPremiumStatus() {
           if (isPremiumUser) {
               buyPremiumBtn.style.display = "none";
               leaderboardBtn.style.display = "block";
-              downloadBtn.disabled = false;
+              downloadBtn.style.display = "block";
               generateReportLnk.style.display = "block";
 
           const premiumMsg = document.createElement("div");

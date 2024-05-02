@@ -2,6 +2,7 @@
 function expenseform(event) {
     event.preventDefault();
     const expenseDetails = {
+        date: event.target.date.value,
         amount: event.target.amount.value,
         description: event.target.description.value,
         category: event.target.category.value
@@ -16,6 +17,7 @@ function expenseform(event) {
       .catch((error) => console.log(error));
   
     // Clearing the input fields
+    document.getElementById("date").value = '';
     document.getElementById("amount").value = '';
     document.getElementById("description").value = '';
     document.getElementById("category").value = '';
@@ -189,6 +191,7 @@ buyPremiumBtn.addEventListener("click", (event) => {
     })
 
 const downloadBtn = document.getElementById("download-file-btn");
+const generateReportLnk = document.getElementById("generate-report-link");
 downloadBtn.disabled = true;
 
 function userPremiumStatus() {
@@ -201,6 +204,7 @@ function userPremiumStatus() {
               buyPremiumBtn.style.display = "none";
               leaderboardBtn.style.display = "block";
               downloadBtn.disabled = false;
+              generateReportLnk.style.display = "block";
 
           const premiumMsg = document.createElement("div");
           premiumMsg.classList.add("mb-1", "premium-user-msg");

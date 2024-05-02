@@ -24,11 +24,7 @@
             <div class="form-group col-md-6 mb-1">
                 <label for="dateInput" class="form-label">Enter a date:</label>
                 <input type="date" class="form-control" id="dateInput" name="dateInput"/><br>
-            </div>    
-            <div class="form-group col-md-6 mb-1">
-                <label for="income">Enter income:</label>
-                  <input type="number" name="income" id="income" class="form-control"/>
-            </div>
+            </div>
             <div class="form-group col-md-6 mb-1">
             <label for="amount">Enter expense:</label>
               <input type="number" name="amount" id="amount" class="form-control" required/>
@@ -52,14 +48,6 @@
           </form>
         </div>
         <div class="col-sm-4 mb-1">
-            <!-- <div>
-                <label for="filter">Filter By:</label>
-                <select id="filter">
-                    <option value="daily">Daily</option>
-                    <option value="weekly">Weekly</option>
-                    <option value="monthly">Monthly</option>
-                </select>
-            </div> -->
             <ul id="expenses"></ul>
             <div class =" justify-content-space-between" id="pagination-container" style="display: none">
                 <button id="previous-btn" disabled class="btn btn-secondary btn-sm page-btn"><</button>
@@ -81,6 +69,9 @@
         <div class="d-flex justify-content-center">
             <button onclick="download()" id="download-file-btn" class="btn btn-primary btn-sm">Download File</button>       
          </div>
+         <div class="text-center mt-3 generate-report">
+            <a id="generate-report-link" href="../reports/report.html" style ="display: none">Generate Report</a>
+        </div>
         </div>
     </div>
   </body>

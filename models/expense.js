@@ -8,6 +8,10 @@ const Expense = sequelize.define('expense', {
         allowNull: false,
         primaryKey: true
     },
+    date: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
     amount: {
         type: Sequelize.DOUBLE,
         allowNull: false

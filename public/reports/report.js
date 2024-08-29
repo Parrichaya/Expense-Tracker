@@ -41,7 +41,7 @@ function displayExpenseReport(expensesData, type) {
 function generateExpenseReport(type, dateOrMonth) {
     localStorage.setItem('reportType', type);
     localStorage.setItem('reportDateOrMonth', dateOrMonth);
-    axios.post(`http://13.236.146.218:6000/reports/report/?type=${type}`, { [type === 'daily' ? 'date' : 'month']: dateOrMonth }, { headers: { "Authorization": localStorage.getItem("token") } })
+    axios.post(`http://13.236.146.218:5001/reports/report/?type=${type}`, { [type === 'daily' ? 'date' : 'month']: dateOrMonth }, { headers: { "Authorization": localStorage.getItem("token") } })
     .then((response) => {
         const expensesData = response.data.expenses;
         displayExpenseReport(expensesData, type);

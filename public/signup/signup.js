@@ -8,7 +8,7 @@ function signup(event) {
       }
     axios
       .post(
-        "http://13.236.146.218:6000/user/signup", signupDetails)
+        "http://13.236.146.218:5001/user/signup", signupDetails)
       .then((response) => {
         console.log(response)
         window.location.href = "../login/login.html";

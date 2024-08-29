@@ -7,7 +7,7 @@ function login(event) {
       }
     axios
       .post(
-        "http://13.236.146.218:6000/user/login", loginDetails)
+        "http://13.236.146.218:5001/user/login", loginDetails)
       .then((response) => {
         console.log(response)
         alert(response.data.message)
@@ -38,7 +38,7 @@ function forgotpassword(event) {
     console.log(email);
 
     axios
-        .post("http://13.236.146.218:6000/password/forgotpassword", { email: email })
+        .post("http://13.236.146.218:5001/password/forgotpassword", { email: email })
         .then((response) => {
             console.log(response)
         })

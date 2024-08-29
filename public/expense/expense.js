@@ -9,7 +9,7 @@ function expenseform(event) {
       }
     axios
       .post(
-        "http://13.236.146.218:5000/expense/add-expense", expenseDetails, { headers: { "Authorization": localStorage.getItem("token") } })
+        "http://13.236.146.218:6000/expense/add-expense", expenseDetails, { headers: { "Authorization": localStorage.getItem("token") } })
       .then((response) => {
         console.log(response)
         displayExpensesOnScreen(response.data.newExpenseDetail)
@@ -60,7 +60,7 @@ function displayExpensesOnScreen(expenseDetails) {
 
     deleteBtn.addEventListener("click", (event) => {
         axios
-          .delete(`http://13.236.146.218:5000/expense/delete-expense/${expenseDetails.id}`, { headers: { "Authorization": localStorage.getItem("token") } })
+          .delete(`http://13.236.146.218:6000/expense/delete-expense/${expenseDetails.id}`, { headers: { "Authorization": localStorage.getItem("token") } })
           .then(() => {
               expenseItem.remove(); 
           })
@@ -92,7 +92,7 @@ rowsPerPageOption.addEventListener('change', () => {
 function fetchExpenses(page) {
     const token = localStorage.getItem('token');
     axios
-        .get(`http://13.236.146.218:5000/expense/get-expenses?page=${page}&limit=${rowsPerPage}`, {
+        .get(`http://13.236.146.218:6000/expense/get-expenses?page=${page}&limit=${rowsPerPage}`, {
             headers: { Authorization: token },
         })
         .then((response) => {
@@ -129,14 +129,14 @@ function fetchExpenses(page) {
 const buyPremiumBtn = document.getElementById("rzp-button");
 buyPremiumBtn.addEventListener("click", (event) => {
   axios
-    .get("http://13.236.146.218:5000/purchase/premiummembership", { headers: { "Authorization": localStorage.getItem("token") } })
+    .get("http://13.236.146.218:6000/purchase/premiummembership", { headers: { "Authorization": localStorage.getItem("token") } })
     .then((response) => {
         const options = {
           "key": response.data.key_id,
           "order_id": response.data.order.id,
           "handler": function (response) {
             axios
-              .post("http://13.236.146.218:5000/purchase/updatetransactionstatus", {
+              .post("http://13.236.146.218:6000/purchase/updatetransactionstatus", {
                   order_id: options.order_id,
                   payment_id: response.razorpay_payment_id
               }, { headers: { "Authorization": localStorage.getItem("token") } })
@@ -156,7 +156,7 @@ buyPremiumBtn.addEventListener("click", (event) => {
         rzp1.on("payment.failed", function (response) {
             console.log(response);
             axios
-              .post("http://13.236.146.218:5000/purchase/updatetransactionstatus", {
+              .post("http://13.236.146.218:6000/purchase/updatetransactionstatus", {
                   order_id: options.order_id,
                   payment_id: response.razorpay_payment_id,
                   error: response.error
@@ -175,7 +175,7 @@ buyPremiumBtn.addEventListener("click", (event) => {
   const leaderboardBtn = document.getElementById("leaderboard-btn");
   leaderboardBtn.addEventListener("click", (event) => {
     axios
-      .get("http://13.236.146.218:5000/premium/leaderboard", { headers: { "Authorization": localStorage.getItem("token") } })
+      .get("http://13.236.146.218:6000/premium/leaderboard", { headers: { "Authorization": localStorage.getItem("token") } })
       .then((response) => {
         const leaderboardData = response.data.leaderboard;
 
@@ -196,7 +196,7 @@ downloadBtn.style.display = "none";
 
 function userPremiumStatus() {
   axios
-      .get("http://13.236.146.218:5000/user/status", { headers: { "Authorization": localStorage.getItem("token") } })
+      .get("http://13.236.146.218:6000/user/status", { headers: { "Authorization": localStorage.getItem("token") } })
       .then((response) => {
           const isPremiumUser = response.data.ispremiumuser;
 
@@ -221,7 +221,7 @@ userPremiumStatus();
 
 function download() {
   axios
-    .get("http://13.236.146.218:5000/user/download", { headers: { "Authorization": localStorage.getItem("token") } })
+    .get("http://13.236.146.218:6000/user/download", { headers: { "Authorization": localStorage.getItem("token") } })
     .then((response) => {
       if (response.status === 200) {
         let a = document.createElement("a");

@@ -2,6 +2,7 @@
 function expenseform(event) {
     event.preventDefault();
     const expenseDetails = {
+        date: event.target.date.value,
         amount: event.target.amount.value,
         description: event.target.description.value,
         category: event.target.category.value
@@ -16,6 +17,7 @@ function expenseform(event) {
       .catch((error) => console.log(error));
   
     // Clearing the input fields
+    document.getElementById("date").value = '';
     document.getElementById("amount").value = '';
     document.getElementById("description").value = '';
     document.getElementById("category").value = '';
@@ -170,26 +172,34 @@ buyPremiumBtn.addEventListener("click", (event) => {
     .catch((error) => console.log(error));
   })
 
-  const leaderboardBtn = document.getElementById("leaderboard-btn");
-  leaderboardBtn.addEventListener("click", (event) => {
+const leaderboardBtn = document.getElementById("leaderboard-btn");
+const leaderboardContainer = document.getElementById("leaderboard-container");
+
+leaderboardBtn.addEventListener("click", (event) => {
+  if (leaderboardContainer.style.display === "block") {
+    leaderboardContainer.style.display = "none";
+  } else {
     axios
       .get("http://localhost:5000/premium/leaderboard", { headers: { "Authorization": localStorage.getItem("token") } })
       .then((response) => {
         const leaderboardData = response.data.leaderboard;
 
-        const leaderboardContainer = document.getElementById("leaderboard-container");
         leaderboardContainer.innerHTML = '';
         leaderboardContainer.innerHTML += '<h5>Leaderboard</h5>';
 
         leaderboardData.forEach((user, index) => {
           leaderboardContainer.innerHTML += `<li>${index + 1}. ${user.username} - ₹${user.totalExpenses}</li>`;
-        })          
+        });
+        leaderboardContainer.style.display = "block";
       })
       .catch((error) => console.log(error));
-    })
+  }
+});
+
 
 const downloadBtn = document.getElementById("download-file-btn");
-downloadBtn.disabled = true;
+const generateReportLnk = document.getElementById("generate-report-link");
+downloadBtn.style.display = "none";
 
 function userPremiumStatus() {
   axios
@@ -200,7 +210,8 @@ function userPremiumStatus() {
           if (isPremiumUser) {
               buyPremiumBtn.style.display = "none";
               leaderboardBtn.style.display = "block";
-              downloadBtn.disabled = false;
+              downloadBtn.style.display = "block";
+              generateReportLnk.style.display = "block";
 
           const premiumMsg = document.createElement("div");
           premiumMsg.classList.add("mb-1", "premium-user-msg");

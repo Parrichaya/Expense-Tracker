@@ -32,6 +32,9 @@ app.use('/premium', premiumRoutes);
 const forgotPasswordRoutes = require('./routes/forgotpassword');
 app.use('/password', forgotPasswordRoutes);
 
+const reportRoutes = require('./routes/report');
+app.use('/reports', reportRoutes);
+
 app.use((req, res, next) => {
     res.sendFile(path.join(__dirname, `public/${req.url}`));
 })
@@ -59,7 +62,7 @@ ForgotPassword.belongsTo(User);
 User.hasMany(FileDownloaded);
 FileDownloaded.belongsTo(User);
 
-sequelize.sync({})
+sequelize.sync({ })
     .then(() => {
         console.log('Listening...');
         app.listen(process.env.PORT || 5000);

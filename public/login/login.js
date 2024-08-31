@@ -28,9 +28,12 @@ const formContainer = document.getElementById("form-block");
 const form = document.getElementById("forgotpassword-form");
 
 forgotPasswordBtn.addEventListener("click", () => {
-    console.log("clicked");
-    formContainer.style.display = "block";
-})
+  if (formContainer.style.display === "block") {
+      formContainer.style.display = "none";
+  } else {
+      formContainer.style.display = "block";
+  }
+});
 
 function forgotpassword(event) {
     event.preventDefault();

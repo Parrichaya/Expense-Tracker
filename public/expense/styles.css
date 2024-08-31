@@ -8,7 +8,7 @@
     font-weight: bold;
 }
 .nav-link {
-    color: whitesmoke;
+    color: white;
     &:hover {
         color: rgb(221, 174, 130);
     }
@@ -71,3 +71,8 @@
       margin: 0 5px; /* Adjust spacing between links */
     }
   }
+
+  .btn-sm {
+    padding: 0.5rem 1rem; /* Smaller padding for the button */
+    font-size: 0.875rem; /* Smaller font size */
+}

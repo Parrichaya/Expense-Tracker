@@ -40,10 +40,11 @@ exports.getExpenses = async (req, res, next) => {
     try {        
         const itemsPerPage = parseInt(req.query.limit) || 3;        
         const currentPage = parseInt(req.query.page) || 1;
-        const {count, rows: expenses} = await Expense.findAndCountAll({
+        const { count, rows: expenses } = await Expense.findAndCountAll({
+            where: { userId: req.user.id }, 
             offset: (currentPage - 1) * itemsPerPage,
             limit: itemsPerPage
-        })
+        });
         const totalPages = Math.ceil(count / itemsPerPage); 
         // const startIndex = (currentPage - 1) * itemsPerPage;
         // const endIndex = Math.min(startIndex + itemsPerPage, expenses.length);

@@ -172,23 +172,29 @@ buyPremiumBtn.addEventListener("click", (event) => {
     .catch((error) => console.log(error));
   })
 
-  const leaderboardBtn = document.getElementById("leaderboard-btn");
-  leaderboardBtn.addEventListener("click", (event) => {
+const leaderboardBtn = document.getElementById("leaderboard-btn");
+const leaderboardContainer = document.getElementById("leaderboard-container");
+
+leaderboardBtn.addEventListener("click", (event) => {
+  if (leaderboardContainer.style.display === "block") {
+    leaderboardContainer.style.display = "none";
+  } else {
     axios
       .get("http://13.236.146.218:5001/premium/leaderboard", { headers: { "Authorization": localStorage.getItem("token") } })
       .then((response) => {
         const leaderboardData = response.data.leaderboard;
 
-        const leaderboardContainer = document.getElementById("leaderboard-container");
         leaderboardContainer.innerHTML = '';
         leaderboardContainer.innerHTML += '<h5>Leaderboard</h5>';
 
         leaderboardData.forEach((user, index) => {
           leaderboardContainer.innerHTML += `<li>${index + 1}. ${user.username} - ₹${user.totalExpenses}</li>`;
-        })          
+        })    
+        leaderboardContainer.style.display = "block";      
       })
       .catch((error) => console.log(error));
-    })
+    }
+  })
 
 const downloadBtn = document.getElementById("download-file-btn");
 const generateReportLnk = document.getElementById("generate-report-link");
